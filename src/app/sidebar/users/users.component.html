@@ -1,0 +1,7 @@
+<div class="user-list">
+  <ng-container *ngFor="let user of users">
+    <dw-user [user]="user"
+             (click)="userClicked(user.id)"
+    ></dw-user>
+  </ng-container>
+</div>

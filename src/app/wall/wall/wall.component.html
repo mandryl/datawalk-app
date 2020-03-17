@@ -1,0 +1,6 @@
+<div class="post-list">
+  <ng-container *ngFor="let post of posts; trackBy:trackByPostId">
+    <dw-post [post]="post"
+             (click)="openPostEditModal(post)"></dw-post>
+  </ng-container>
+</div>
