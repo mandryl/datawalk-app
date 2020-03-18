@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState, getUserPostsState, getUserState } from 'src/app/reducers';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as userActions from '../../actions/user.actions';
 import * as userPostsActions from '../../actions/user-posts.actions';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -46,10 +47,19 @@ export class UsersService {
     const options: any = {
       title: postTitle,
       body: postBody,
+      id: postId,
+      userId: 1,
     };
+    const headers = new HttpHeaders().append('Content-type', 'application/json; charset=UTF-8');
     return this.http.patch(
       `https://jsonplaceholder.typicode.com/posts/${postId}`,
       JSON.stringify(options),
+      { headers },
+    ).pipe(
+      map((result) => {
+        console.log(result);
+        return result;
+      }),
     );
   }
 }

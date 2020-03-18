@@ -28,7 +28,7 @@ export class WallComponent implements OnInit, OnDestroy {
     if (!item) {
       return null;
     }
-    return item.id;
+    return item.title;
   }
 
   public ngOnInit() {
@@ -40,20 +40,36 @@ export class WallComponent implements OnInit, OnDestroy {
           map(result => result.userPosts),
         );
       })
-    ).subscribe((userPosts: any[]) => this.posts = userPosts);
+      // need a deep copy to be able to modify the array, since redux keeps it in readonly state
+    ).subscribe((userPosts: any[]) => {
+      if (userPosts) {
+        this.posts = JSON.parse(JSON.stringify(userPosts));
+      }
+    });
   }
 
   public ngOnDestroy() {
     this.unsubscriber.next();
   }
 
-  public openPostEditModal(post: any) {
+  public openPostEditModal(post: any, postIndex: number) {
     const config: MatDialogConfig = {
       width: '450px',
       height: '350px',
+      data: {
+        title: post.title,
+        body: post.body,
+        id: post.id,
+      },
     };
     this.matDialogRef = this.matDialog.open(EditPostComponent, config);
-    this.matDialogRef.beforeClosed().pipe(takeUntil(this.unsubscriber)).subscribe();
+    this.matDialogRef.beforeClosed().pipe(takeUntil(this.unsubscriber)).subscribe(
+      (updatedPost: any) => this.insertModifiedPost(postIndex, updatedPost),
+    );
+  }
+
+  public insertModifiedPost(postIndex: number, updatedPost: any) {
+    this.posts.splice(postIndex, 1, updatedPost);
   }
 
 }

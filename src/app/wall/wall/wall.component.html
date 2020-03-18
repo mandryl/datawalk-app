@@ -1,6 +1,6 @@
 <div class="post-list">
-  <ng-container *ngFor="let post of posts; trackBy:trackByPostId">
+  <ng-container *ngFor="let post of posts; trackBy:trackByPostId; let i = 'index'">
     <dw-post [post]="post"
-             (click)="openPostEditModal(post)"></dw-post>
+             (click)="openPostEditModal(post, i)"></dw-post>
   </ng-container>
 </div>

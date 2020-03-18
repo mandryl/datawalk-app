@@ -7,13 +7,13 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 import { WallModule } from './wall/wall.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditPostComponent } from './shared/components/edit-post/edit-post.component';
 import { effects } from './effects';
 import { reducers, metaReducers } from './reducers';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { reducers, metaReducers } from './reducers';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     SidebarModule,
     WallModule,
     HttpClientModule,
