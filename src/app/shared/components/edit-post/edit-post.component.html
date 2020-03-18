@@ -1,15 +1,19 @@
-<p>Edit post title:</p>
-<input type="text"
-       [(ngModel)]="postTitle"
-       name="edit-title"
-       (keyup.enter)="confirm()">
-
-<p>Edit post content:</p>
-<input type="text"
-       [(ngModel)]="postBody"
-       name="content-edit"
-       (keyup.enter)="confirm()">
-
-<button class="confirm-button" (click)="confirm()">
-  Confirm
-</button>
+<div class="edit-form">
+  <p>Edit post title:</p>
+  <input type="text"
+          [(ngModel)]="postTitle"
+          name="edit-title"
+          (keyup.enter)="confirm()">
+  
+  <p>Edit post content:</p>
+  <input type="text"
+          [(ngModel)]="postBody"
+          name="content-edit"
+          (keyup.enter)="confirm()">
+  
+  <div class="dialog-actions">
+    <button class="confirm-button" (click)="confirm()">
+      Confirm
+    </button>
+  </div>
+</div>
