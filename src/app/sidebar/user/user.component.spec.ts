@@ -16,10 +16,20 @@ describe('UserComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserComponent);
     component = fixture.componentInstance;
+    component.user = {
+      name: 'Test user',
+      id: 1,
+      username: 'Test username',
+    };
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have correct text as users name', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.user-name').textContent).toContain('Test user');
   });
 });
